@@ -102,3 +102,27 @@ button:hover {
 .hidden {
   display: none;
 }
+
+.skill-box {
+  margin-top: 20px;
+  padding: 20px;
+  background: #fff8e6;
+  border-radius: 12px;
+  text-align: left;
+}
+
+.skill-box h2 {
+  font-size: 14px;
+  color: #444;
+  margin-bottom: 10px;
+}
+
+.skill-box ul {
+  padding-left: 20px;
+}
+
+.skill-box li {
+  font-size: 13px;
+  color: #333;
+  margin-bottom: 8px;
+}
