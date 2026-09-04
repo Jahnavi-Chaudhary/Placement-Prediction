@@ -33,8 +33,38 @@ form.addEventListener('submit', async function (event) {
 
     probabilityValue.textContent = probabilityPercent + '%';
     resultBox.classList.remove('hidden');
+
+
+    const recommendations = await getSkillRecommendations(studentData);
+    const skillList = document.getElementById('skillList');
+    skillList.innerHTML = '';
+    recommendations.forEach(function (tip) {
+      const li = document.createElement('li');
+      li.textContent = tip;
+      skillList.appendChild(li);
+    });
+    document.getElementById('skillBox').classList.remove('hidden');
   } catch (error) {
     console.error('Prediction failed:', error);
     alert('Something went wrong. Check the console for details.');
   }
 });
+
+
+//skill reccomendation
+
+async function getSkillRecommendations(studentData) {
+  try {
+    const response = await fetch('https://placement-prediction-y29i.onrender.com/recommend-skills', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(studentData)
+    });
+
+    const data = await response.json();
+    return data.recommendations;
+  } catch (error) {
+    console.error('Skill recommendation failed:', error);
+    return [];
+  }
+}
