@@ -79,3 +79,46 @@ def predict(student: Student):
         "probability": float(probability[0][1])
     }
 
+    # ===== Skill Recommender=====
+
+def get_skill_recommendations(student: Student):
+    recommendations = []
+
+    if student.CGPA < 7:
+        recommendations.append("Focus on improving your CGPA — aim for consistent performance above 7.0")
+
+    if student.Coding_Skills < 7:
+        recommendations.append("Practice coding daily on platforms like LeetCode or HackerRank")
+
+    if student.Communication_Skills < 7:
+        recommendations.append("Join a public speaking or communication skills workshop")
+
+    if student.Aptitude_Test_Score < 70:
+        recommendations.append("Practice aptitude tests — quantitative, logical, and verbal reasoning")
+
+    if student.Soft_Skills_Rating < 7:
+        recommendations.append("Work on teamwork and soft skills through group projects or clubs")
+
+    if student.Internships < 1:
+        recommendations.append("Apply for at least one internship to gain practical experience")
+
+    if student.Projects < 2:
+        recommendations.append("Build 2-3 solid projects to showcase on your resume")
+
+    if student.Certifications < 1:
+        recommendations.append("Earn a relevant online certification (Coursera, Udemy, etc.)")
+
+    if student.Backlogs > 0:
+        recommendations.append("Clear pending backlogs as a priority — they impact placement eligibility")
+
+    if len(recommendations) == 0:
+        recommendations.append("Your profile looks strong across all areas — keep it up!")
+
+    return recommendations
+
+
+@app.post("/recommend-skills")
+def recommend_skills(student: Student):
+    recommendations = get_skill_recommendations(student)
+    return {"recommendations": recommendations}
+
